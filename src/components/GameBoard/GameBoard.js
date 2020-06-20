@@ -8,7 +8,7 @@ import styles from './GameBoard.module.scss';
 const GameBoard = ({ isRollingDice, rollDice }) => {
   return (
     <div className={styles.gameBoard}>
-      <Scoreboard />
+      {/* <Scoreboard /> */}
       <Dice />
       <Button
         className={styles.rollButton}

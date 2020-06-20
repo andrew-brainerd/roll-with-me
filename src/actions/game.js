@@ -21,6 +21,8 @@ export const rollDice = () => async (dispatch, getState) => {
       lockedDice.includes(d) ? previousRoll[d] : die
     );
 
+    utils.calculateScores(lockedRoll);
+
     dispatch(diceRolled(lockedRoll));
   });
 };
