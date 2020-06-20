@@ -1,0 +1,40 @@
+.scoreboard {
+  background: white;
+  border: 2px solid black;
+  display: flex;
+  font-size: 1.3em;
+  margin: 10px auto;
+  padding: 5px;
+  user-select: none;
+  width: 650px;
+
+  .section {
+    border: 3px solid black;
+    padding: 10px;
+    width: 50%;
+
+    .scoreLine {
+      display: flex;
+      margin: 5px;
+
+      .scoreLabel {
+        padding: 5px;
+        width: 70%;
+      }
+
+      .scoreValue {
+        border: 2px solid black;
+        padding: 5px;
+        text-align: center;
+        width: 15%;
+      }
+
+      .scoreAvailable {
+        border: 2px solid black;
+        padding: 5px;
+        text-align: center;
+        width: 15%;
+      }
+    }
+  }
+}

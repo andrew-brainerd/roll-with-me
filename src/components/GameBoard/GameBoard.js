@@ -1,12 +1,14 @@
 import React from 'react';
 import { bool, func } from 'prop-types';
-import Button from '../common/Button/Button';
+import Scoreboard from './Scoreboard/Scoreboard';
 import Dice from './Dice/container';
+import Button from '../common/Button/Button';
 import styles from './GameBoard.module.scss';
 
 const GameBoard = ({ isRollingDice, rollDice }) => {
   return (
     <div className={styles.gameBoard}>
+      <Scoreboard />
       <Dice />
       <Button
         className={styles.rollButton}
