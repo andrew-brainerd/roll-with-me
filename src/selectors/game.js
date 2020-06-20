@@ -6,4 +6,6 @@ export const getCurrentPlayer = path(['game', 'currentPlayer']);
 
 export const getCurrentRoll = path(['game', 'currentRoll']);
 
+export const getLockedDice = path(['game', 'lockedDice']);
+
 export const getScores = path(['game', 'scores']);

@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
-import { arrayOf, number } from 'prop-types';
+import React from 'react';
+import { arrayOf, number, func } from 'prop-types';
 import styles from './Dice.module.scss';
 
-const Dice = ({ currentRoll }) => {
-  const [lockedDice, setLockedDice] = useState([]);
-
+const Dice = ({ currentRoll, lockedDice, lockDie, unlockDie }) => {
   const getIsLocked = die => lockedDice.includes(die);
-  const lockDie = die => setLockedDice([...lockedDice, die]);
-  const unlockDie = die => setLockedDice(lockedDice.filter(d => d !== die));
-
-  console.log('Locked: ', lockedDice);
 
   return (
     <div className={styles.diceContainer}>
@@ -30,7 +24,10 @@ const Dice = ({ currentRoll }) => {
 };
 
 Dice.propTypes = {
-  currentRoll: arrayOf(number)
+  currentRoll: arrayOf(number),
+  lockedDice: arrayOf(number),
+  lockDie: func.isRequired,
+  unlockDie: func.isRequired
 };
 
 export default Dice;

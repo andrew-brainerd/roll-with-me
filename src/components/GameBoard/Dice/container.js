@@ -1,9 +1,16 @@
 import { connect } from 'react-redux';
-import { getCurrentRoll } from '../../../selectors/game';
+import { getCurrentRoll, getLockedDice } from '../../../selectors/game';
+import { lockDie, unlockDie } from '../../../actions/game';
 import Dice from './Dice';
 
 const mapStateToProps = state => ({
-  currentRoll: getCurrentRoll(state)
+  currentRoll: getCurrentRoll(state),
+  lockedDice: getLockedDice(state)
 });
 
-export default connect(mapStateToProps)(Dice);
+const mapDispatchToProps = dispatch => ({
+  lockDie: die => dispatch(lockDie(die)),
+  unlockDie: die => dispatch(unlockDie(die))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dice);
