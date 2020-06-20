@@ -11,7 +11,7 @@ export const initialState = {
   }
 };
 
-const images = (state = initialState, action) => {
+const game = (state = initialState, action) => {
   switch (action.type) {
     case ROLLING_DICE:
       return {
@@ -29,4 +29,4 @@ const images = (state = initialState, action) => {
   }
 };
 
-export default images;
+export default game;
