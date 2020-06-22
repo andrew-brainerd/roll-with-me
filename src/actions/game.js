@@ -5,11 +5,13 @@ export const ROLLING_DICE = 'ROLLING_DICE';
 export const DICE_ROLLED = 'DICE_ROLLED';
 export const LOCK_DIE = 'LOCK_DIE';
 export const UNLOCK_DIE = 'UNLOCK_DIE';
+export const SCORES_CALCULATED = 'SCORES_CALCULATED';
 
 export const rollingDice = { type: ROLLING_DICE };
 export const diceRolled = roll => ({ type: DICE_ROLLED, roll });
 export const lockDie = die => ({ type: LOCK_DIE, die });
 export const unlockDie = die => ({ type: UNLOCK_DIE, die });
+export const scoresCalculated = scores => ({ type: SCORES_CALCULATED, scores });
 
 export const rollDice = () => async (dispatch, getState) => {
   const previousRoll = getCurrentRoll(getState());
@@ -21,8 +23,7 @@ export const rollDice = () => async (dispatch, getState) => {
       lockedDice.includes(d) ? previousRoll[d] : die
     );
 
-    utils.calculateScores(lockedRoll);
-
+    dispatch(scoresCalculated(utils.calculateScores(lockedRoll)));
     dispatch(diceRolled(lockedRoll));
   });
 };

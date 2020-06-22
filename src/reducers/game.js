@@ -1,15 +1,20 @@
-import { ROLLING_DICE, DICE_ROLLED, LOCK_DIE, UNLOCK_DIE } from '../actions/game';
-import { PLAYER1, PLAYER2 } from '../constants/game';
+import {
+  ROLLING_DICE,
+  DICE_ROLLED,
+  LOCK_DIE,
+  UNLOCK_DIE,
+  SCORES_CALCULATED
+} from '../actions/game';
+import { PLAYER1, PLAYER2, emptyScoreboard } from '../constants/game';
 
 export const initialState = {
   isRollingDice: false,
   currentPlayer: null,
   currentRoll: [0, 0, 0, 0, 0],
+  currentScores: emptyScoreboard,
   lockedDice: [],
-  scores: {
-    [PLAYER1]: 0,
-    [PLAYER2]: 0
-  }
+  [PLAYER1]: emptyScoreboard,
+  [PLAYER2]: emptyScoreboard
 };
 
 const game = (state = initialState, action) => {
@@ -37,6 +42,11 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         lockedDice: state.lockedDice.filter(d => d !== action.die)
+      };
+    case SCORES_CALCULATED:
+      return {
+        ...state,
+        currentScores: action.scores
       };
     default:
       return state;
