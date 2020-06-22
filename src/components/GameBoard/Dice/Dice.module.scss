@@ -1,5 +1,9 @@
+@import '../../../styles/sizing.scss';
+
 .diceContainer {
+  align-items: center;
   display: flex;
+  justify-content: center;
   margin: 20px auto;
 
   .die {
@@ -20,6 +24,17 @@
     &.locked {
       background: #fbeec1;
       border-color: #379683;
+    }
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  .diceContainer {
+    .die {
+      font-size: 3em;
+      margin: 5px;
+      height: 50px;
+      width: 50px;
     }
   }
 }
