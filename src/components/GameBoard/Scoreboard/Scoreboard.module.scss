@@ -16,6 +16,7 @@
     width: 50%;
 
     .scoreLine {
+      border-radius: 5px;
       display: flex;
       margin: 5px;
 
@@ -40,6 +41,10 @@
         padding: 5px;
         text-align: center;
         width: 15%;
+
+        &.selected {
+          background: #8ee4af;
+        }
       }
     }
   }
