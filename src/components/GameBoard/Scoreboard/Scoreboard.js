@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { object } from 'prop-types';
+import React from 'react';
+import { object, string, number, func } from 'prop-types';
 import styles from './Scoreboard.module.scss';
 import {
   ONES,
@@ -17,9 +17,7 @@ import {
   CHANCE
 } from '../../../constants/game';
 
-const Scoreboard = ({ player1, currentScores }) => {
-  const [selectedScore, setSelectedScore] = useState({ slot: '' });
-
+const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selectedAvailableScore, setSelected }) => {
   const {
     [ONES]: ones,
     [TWOS]: twos,
@@ -52,85 +50,127 @@ const Scoreboard = ({ player1, currentScores }) => {
     [CHANCE]: availableChance
   } = currentScores;
 
-  console.log(selectedScore);
+  console.log({ currentScores, selectedSlot, selectedScore, selectedAvailableScore });
+
+  const hasCurrentScores = Object.values(currentScores).filter(score => score !== 0).length > 0;
+
+  const numberScores = [
+    {
+      slot: ONES,
+      label: 'Ones',
+      score: ones,
+      availableScore: availableOnes
+    },
+    {
+      slot: TWOS,
+      label: 'Twos',
+      score: twos,
+      availableScore: availableTwos
+    },
+    {
+      slot: THREES,
+      label: 'Threes',
+      score: threes,
+      availableScore: availableThrees
+    },
+    {
+      slot: FOURS,
+      label: 'Fours',
+      score: fours,
+      availableScore: availableFours
+    },
+    {
+      slot: FIVES,
+      label: 'Fives',
+      score: fives,
+      availableScore: availableFives
+    },
+    {
+      slot: SIXES,
+      label: 'Sixes',
+      score: sixes,
+      availableScore: availableSixes
+    }
+  ];
+
+  const specialScores = [
+    {
+      slot: KIND3,
+      label: '3 of a Kind',
+      score: kind3,
+      availableScore: availableKind3
+    },
+    {
+      slot: KIND4,
+      label: '4 of a Kind',
+      score: kind4,
+      availableScore: availableKind4
+    },
+    {
+      slot: FULL_HOUSE,
+      label: 'Full House',
+      score: fullHouse,
+      availableScore: availableFullHouse
+    },
+    {
+      slot: SM_STRAIGHT,
+      label: 'SM Straight',
+      score: smStraight,
+      availableScore: availableSmStraight
+    },
+    {
+      slot: LG_STRAIGHT,
+      label: 'LG Straight',
+      score: lgStraight,
+      availableScore: availableLgStraight
+    },
+    {
+      slot: KIND5,
+      label: '5 of a Kind',
+      score: kind5,
+      availableScore: availableKind5
+    },
+    {
+      slot: CHANCE,
+      label: 'Chance',
+      score: chance,
+      availableScore: availableChance
+    }
+  ];
 
   return (
     <div className={styles.scoreboard}>
       <div className={styles.section}>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: ONES, score: availableOnes })}>
-          <div className={styles.scoreLabel}>Ones</div>
-          <div className={styles.scoreValue}>{ones}</div>
+        {numberScores.map(({ slot, label, score, availableScore }) => (
           <div
+            key={label}
             className={[
-              styles.scoreAvailable,
-              selectedScore.slot === ONES ? styles.selected : ''
+              styles.scoreLine,
+              selectedSlot === slot && score < 0 ? styles.selected : ''
             ].join(' ')}
+            onClick={() => hasCurrentScores && setSelected(slot, score, availableScore)}
           >
-            {availableOnes}
+            <div className={styles.scoreLabel}>{label}</div>
+            <div className={styles.scoreValue}>{score >= 0 ? score : ''}</div>
+            <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>
           </div>
-        </div>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: TWOS, score: availableTwos })}>
-          <div className={styles.scoreLabel}>Twos</div>
-          <div className={styles.scoreValue}>{twos}</div>
-          <div className={styles.scoreAvailable}>{availableTwos}</div>
-        </div>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: THREES, score: availableThrees })}>
-          <div className={styles.scoreLabel}>Threes</div>
-          <div className={styles.scoreValue}>{threes}</div>
-          <div className={styles.scoreAvailable}>{availableThrees}</div>
-        </div>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: FOURS, score: availableFours })}>
-          <div className={styles.scoreLabel}>Fours</div>
-          <div className={styles.scoreValue}>{fours}</div>
-          <div className={styles.scoreAvailable}>{availableFours}</div>
-        </div>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: FIVES, score: availableFives })}>
-          <div className={styles.scoreLabel}>Fives</div>
-          <div className={styles.scoreValue}>{fives}</div>
-          <div className={styles.scoreAvailable}>{availableFives}</div>
-        </div>
-        <div className={styles.scoreLine} onClick={() => setSelectedScore({ slot: SIXES, score: availableSixes })}>
-          <div className={styles.scoreLabel}>Sixes</div>
-          <div className={styles.scoreValue}>{sixes}</div>
-          <div className={styles.scoreAvailable}>{availableSixes}</div>
-        </div>
+        ))}
       </div>
       <div className={styles.section}>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>3 of a Kind</div>
-          <div className={styles.scoreValue}>{kind3}</div>
-          <div className={styles.scoreAvailable}>{availableKind3}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>4 of a Kind</div>
-          <div className={styles.scoreValue}>{kind4}</div>
-          <div className={styles.scoreAvailable}>{availableKind4}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>Full House</div>
-          <div className={styles.scoreValue}>{fullHouse}</div>
-          <div className={styles.scoreAvailable}>{availableFullHouse}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>SM Straight</div>
-          <div className={styles.scoreValue}>{smStraight}</div>
-          <div className={styles.scoreAvailable}>{availableSmStraight}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>LG Straight</div>
-          <div className={styles.scoreValue}>{lgStraight}</div>
-          <div className={styles.scoreAvailable}>{availableLgStraight}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>5 of a Kind</div>
-          <div className={styles.scoreValue}>{kind5}</div>
-          <div className={styles.scoreAvailable}>{availableKind5}</div>
-        </div>
-        <div className={styles.scoreLine}>
-          <div className={styles.scoreLabel}>Chance</div>
-          <div className={styles.scoreValue}>{chance}</div>
-          <div className={styles.scoreAvailable}>{availableChance}</div>
-        </div>
+        {specialScores.map(({ slot, label, score, availableScore }) => (
+          <div
+            key={label}
+            className={[
+              styles.scoreLine,
+              selectedSlot === slot && score < 0 ? styles.selected : ''
+            ].join(' ')}
+            onClick={() => hasCurrentScores && setSelected(slot, score, availableScore)}
+          >
+            <div className={styles.scoreLabel}>{label}</div>
+            <div className={styles.scoreValue}>{score >= 0 ? score : ''}</div>
+            <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -138,7 +178,11 @@ const Scoreboard = ({ player1, currentScores }) => {
 
 Scoreboard.propTypes = {
   player1: object,
-  currentScores: object
+  currentScores: object,
+  selectedSlot: string,
+  selectedScore: number,
+  selectedAvailableScore: number,
+  setSelected: func.isRequired
 };
 
 export default Scoreboard;

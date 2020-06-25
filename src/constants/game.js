@@ -16,17 +16,17 @@ export const KIND5 = 'kind5';
 export const CHANCE = 'chance';
 
 export const emptyScoreboard = {
-  [ONES]: 0,
-  [TWOS]: 0,
-  [THREES]: 0,
-  [FOURS]: 0,
-  [FIVES]: 0,
-  [SIXES]: 0,
-  [KIND3]: 0,
-  [KIND4]: 0,
-  [FULL_HOUSE]: 0,
-  [SM_STRAIGHT]: 0,
-  [LG_STRAIGHT]: 0,
-  [KIND5]: 0,
-  [CHANCE]: 0
+  [ONES]: -1,
+  [TWOS]: -1,
+  [THREES]: -1,
+  [FOURS]: -1,
+  [FIVES]: -1,
+  [SIXES]: -1,
+  [KIND3]: -1,
+  [KIND4]: -1,
+  [FULL_HOUSE]: -1,
+  [SM_STRAIGHT]: -1,
+  [LG_STRAIGHT]: -1,
+  [KIND5]: -1,
+  [CHANCE]: -1
 };

@@ -14,3 +14,9 @@ export const getPlayer1Scores = path(['game', PLAYER1]);
 export const getPlayer2Scores = path(['game', PLAYER2]);
 
 export const getCurrentScores = path(['game', 'currentScores']);
+
+export const getSelectedSlot = path(['game', 'selectedSlot']);
+
+export const getSelectedScore = path(['game', 'selectedScore']);
+
+export const getSelectedAvailableScore = path(['game', 'selectedAvailableScore']);

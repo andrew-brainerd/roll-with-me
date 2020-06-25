@@ -1,14 +1,23 @@
 import { connect } from 'react-redux';
-import { getIsRollingDice } from '../../selectors/game';
-import { rollDice } from '../../actions/game';
+import {
+  getIsRollingDice,
+  getSelectedSlot,
+  getSelectedScore,
+  getSelectedAvailableScore
+} from '../../selectors/game';
+import { rollDice, play } from '../../actions/game';
 import GameBoard from './GameBoard';
 
 const mapStateToProps = state => ({
-  isRollingDice: getIsRollingDice(state)
+  isRollingDice: getIsRollingDice(state),
+  selectedSlot: getSelectedSlot(state),
+  selectedScore: getSelectedScore(state),
+  selectedAvailableScore: getSelectedAvailableScore(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  rollDice: () => dispatch(rollDice())
+  rollDice: () => dispatch(rollDice()),
+  play: (slot, score) => dispatch(play(slot, score))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);

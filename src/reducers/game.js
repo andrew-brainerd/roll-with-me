@@ -3,18 +3,23 @@ import {
   DICE_ROLLED,
   LOCK_DIE,
   UNLOCK_DIE,
-  SCORES_CALCULATED
+  SCORES_CALCULATED,
+  SET_SELECTED,
+  PLAY
 } from '../actions/game';
 import { PLAYER1, PLAYER2, emptyScoreboard } from '../constants/game';
 
 export const initialState = {
   isRollingDice: false,
-  currentPlayer: null,
+  currentPlayer: PLAYER1,
   currentRoll: [0, 0, 0, 0, 0],
   currentScores: emptyScoreboard,
   lockedDice: [],
   [PLAYER1]: emptyScoreboard,
-  [PLAYER2]: emptyScoreboard
+  [PLAYER2]: emptyScoreboard,
+  selectedSlot: null,
+  selectedScore: 0,
+  selectedAvailableScore: 0
 };
 
 const game = (state = initialState, action) => {
@@ -47,6 +52,21 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         currentScores: action.scores
+      };
+    case SET_SELECTED:
+      return {
+        ...state,
+        selectedSlot: action.slot,
+        selectedScore: action.score,
+        selectedAvailableScore: action.availableScore
+      };
+    case PLAY:
+      return {
+        ...state,
+        [state.currentPlayer]: {
+          ...state[state.currentPlayer],
+          [action.slot]: action.score
+        }
       };
     default:
       return state;
