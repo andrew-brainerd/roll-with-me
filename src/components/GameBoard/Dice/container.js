@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { getCurrentRoll, getLockedDice } from '../../../selectors/game';
+import { getCurrentRoll, getLockedDice, getCurrentRollNum } from '../../../selectors/game';
 import { lockDie, unlockDie } from '../../../actions/game';
 import Dice from './Dice';
 
 const mapStateToProps = state => ({
   currentRoll: getCurrentRoll(state),
+  currentRollNum: getCurrentRollNum(state),
   lockedDice: getLockedDice(state)
 });
 

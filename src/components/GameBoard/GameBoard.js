@@ -5,7 +5,15 @@ import Dice from './Dice/container';
 import Button from '../common/Button/Button';
 import styles from './GameBoard.module.scss';
 
-const GameBoard = ({ isRollingDice, selectedSlot, selectedScore, selectedAvailableScore, rollDice, play }) => {
+const GameBoard = ({
+  isRollingDice,
+  currentRollNum,
+  selectedSlot,
+  selectedScore,
+  selectedAvailableScore,
+  rollDice,
+  play
+}) => {
   return (
     <div className={styles.gameBoard}>
       <Scoreboard />
@@ -15,7 +23,7 @@ const GameBoard = ({ isRollingDice, selectedSlot, selectedScore, selectedAvailab
           className={styles.rollButton}
           text={isRollingDice ? 'Rolling...' : 'Roll'}
           onClick={() => rollDice()}
-          disabled={isRollingDice}
+          disabled={isRollingDice || currentRollNum > 2}
         />
         <Button
           className={styles.playButton}
@@ -30,6 +38,7 @@ const GameBoard = ({ isRollingDice, selectedSlot, selectedScore, selectedAvailab
 
 GameBoard.propTypes = {
   isRollingDice: bool,
+  currentRollNum: number,
   selectedSlot: string,
   selectedScore: number,
   selectedAvailableScore: number,

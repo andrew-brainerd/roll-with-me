@@ -50,8 +50,6 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
     [CHANCE]: availableChance
   } = currentScores;
 
-  console.log({ currentScores, selectedSlot, selectedScore, selectedAvailableScore });
-
   const hasCurrentScores = Object.values(currentScores).filter(score => score !== 0).length > 0;
 
   const numberScores = [
@@ -92,6 +90,11 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
       availableScore: availableSixes
     }
   ];
+
+  const getNumValue = num => num < 0 ? 0 : num;
+
+  const numberTotal = getNumValue(ones) + getNumValue(twos) + getNumValue(threes) +
+    getNumValue(fours) + getNumValue(fives) + getNumValue(sixes);
 
   const specialScores = [
     {
@@ -138,6 +141,11 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
     }
   ];
 
+  const specialTotal = getNumValue(kind3) + getNumValue(kind4) + getNumValue(kind5) +
+    getNumValue(fullHouse) + getNumValue(smStraight) + getNumValue(lgStraight) + getNumValue(chance);
+
+  const total = numberTotal + specialTotal;
+
   return (
     <div className={styles.scoreboard}>
       <div className={styles.section}>
@@ -155,6 +163,14 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
             <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>
           </div>
         ))}
+        <div className={styles.scoreLine}>
+          <div className={styles.scoreLabel}>Bonus</div>
+          <div className={styles.scoreValue} style={{ width: '30%' }}>{numberTotal >= 63 ? 35 : ''}</div>
+        </div>
+        <div className={styles.scoreLine}>
+          <div className={styles.scoreLabel}>Num. Total</div>
+          <div className={styles.scoreValue} style={{ width: '30%' }}>{numberTotal > 0 ? numberTotal : ''}</div>
+        </div>
       </div>
       <div className={styles.section}>
         {specialScores.map(({ slot, label, score, availableScore }) => (
@@ -171,6 +187,10 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
             <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>
           </div>
         ))}
+        <div className={styles.scoreLine}>
+          <div className={styles.scoreLabel}>Total</div>
+          <div className={styles.scoreValue} style={{ width: '30%' }}>{total > 0 ? total : ''}</div>
+        </div>
       </div>
     </div>
   );

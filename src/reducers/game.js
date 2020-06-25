@@ -13,6 +13,7 @@ export const initialState = {
   isRollingDice: false,
   currentPlayer: PLAYER1,
   currentRoll: [0, 0, 0, 0, 0],
+  currentRollNum: 0,
   currentScores: emptyScoreboard,
   lockedDice: [],
   [PLAYER1]: emptyScoreboard,
@@ -33,7 +34,8 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         isRollingDice: false,
-        currentRoll: action.roll
+        currentRoll: action.roll,
+        currentRollNum: state.currentRollNum + 1
       };
     case LOCK_DIE:
       return {
@@ -66,7 +68,8 @@ const game = (state = initialState, action) => {
         [state.currentPlayer]: {
           ...state[state.currentPlayer],
           [action.slot]: action.score
-        }
+        },
+        currentRollNum: 0
       };
     default:
       return state;

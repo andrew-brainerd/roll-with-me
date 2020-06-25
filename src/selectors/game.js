@@ -3,6 +3,8 @@ import { PLAYER1, PLAYER2 } from '../constants/game';
 
 export const getIsRollingDice = path(['game', 'isRollingDice']);
 
+export const getCurrentRollNum = path(['game', 'currentRollNum']);
+
 export const getCurrentPlayer = path(['game', 'currentPlayer']);
 
 export const getCurrentRoll = path(['game', 'currentRoll']);

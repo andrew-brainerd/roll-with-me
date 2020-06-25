@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import {
   getIsRollingDice,
+  getCurrentRollNum,
   getSelectedSlot,
   getSelectedScore,
   getSelectedAvailableScore
@@ -10,6 +11,7 @@ import GameBoard from './GameBoard';
 
 const mapStateToProps = state => ({
   isRollingDice: getIsRollingDice(state),
+  currentRollNum: getCurrentRollNum(state),
   selectedSlot: getSelectedSlot(state),
   selectedScore: getSelectedScore(state),
   selectedAvailableScore: getSelectedAvailableScore(state)
