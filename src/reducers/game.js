@@ -5,11 +5,14 @@ import {
   UNLOCK_DIE,
   SCORES_CALCULATED,
   SET_SELECTED,
-  PLAY
+  PLAY_GAME,
+  LOADING_GAMES,
+  GAMES_LOADED
 } from '../actions/game';
 import { PLAYER1, PLAYER2, emptyScoreboard } from '../constants/game';
 
 export const initialState = {
+  isPlaying: false,
   isRollingDice: false,
   currentPlayer: PLAYER1,
   currentRoll: [0, 0, 0, 0, 0],
@@ -20,7 +23,8 @@ export const initialState = {
   [PLAYER2]: emptyScoreboard,
   selectedSlot: null,
   selectedScore: 0,
-  selectedAvailableScore: 0
+  selectedAvailableScore: 0,
+  playerGames: []
 };
 
 const game = (state = initialState, action) => {
@@ -62,7 +66,7 @@ const game = (state = initialState, action) => {
         selectedScore: action.score,
         selectedAvailableScore: action.availableScore
       };
-    case PLAY:
+    case PLAY_GAME:
       return {
         ...state,
         [state.currentPlayer]: {
@@ -70,6 +74,17 @@ const game = (state = initialState, action) => {
           [action.slot]: action.score
         },
         currentRollNum: 0
+      };
+    case LOADING_GAMES:
+      return {
+        ...state,
+        isLoadingGames: true
+      };
+    case GAMES_LOADED:
+      return {
+        ...state,
+        isLoadingGames: false,
+        playerGames: action.games
       };
     default:
       return state;

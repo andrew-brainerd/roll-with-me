@@ -6,8 +6,6 @@ import Button from '../../common/Button/Button';
 const Dice = ({ currentRoll, currentRollNum, lockedDice, lockDie, unlockDie }) => {
   const getIsLocked = die => lockedDice.includes(die);
 
-  console.log(currentRollNum);
-
   return (
     <div className={styles.diceContainer}>
       {currentRoll.map((die, d) => (
