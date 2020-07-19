@@ -1,5 +1,5 @@
 import React from 'react';
-import { node, bool, func, string } from 'prop-types';
+import { node, bool, func, string, oneOfType, number } from 'prop-types';
 import noop from '../../../utils/noop';
 import styles from './Button.module.scss';
 
@@ -23,7 +23,7 @@ Button.propTypes = {
   disabled: bool,
   name: string,
   onClick: func.isRequired,
-  text: string
+  text: oneOfType([string, number])
 };
 
 export default Button;

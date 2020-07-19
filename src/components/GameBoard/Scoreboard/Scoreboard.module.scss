@@ -16,26 +16,23 @@
     width: 50%;
 
     .scoreLine {
+      border-radius: 5px;
       display: flex;
-      margin: 5px;
+      padding: 5px;
+
+      &.selected {
+        background: #edf5e1;
+      }
 
       .scoreLabel {
         padding: 5px;
         width: 70%;
       }
 
-      .scoreValue {
+      .scoreValue, .scoreAvailable {
         border: 2px solid black;
         height: 15px;
-        margin: 0 3px;
-        padding: 5px;
-        text-align: center;
-        width: 15%;
-      }
-
-      .scoreAvailable {
-        border: 2px solid black;
-        height: 15px;
+        line-height: 17px;
         margin: 0 3px;
         padding: 5px;
         text-align: center;
