@@ -7,20 +7,22 @@ import {
   SET_SELECTED,
   PLAY_ROLL,
   LOADING_GAMES,
-  GAMES_LOADED
+  GAMES_LOADED,
+  CREATING_GAME,
+  GAME_LOADED
 } from '../actions/game';
-import { PLAYER1, PLAYER2, emptyScoreboard } from '../constants/game';
+import { emptyScoreboard } from '../constants/game';
 
 export const initialState = {
   isPlaying: false,
   isRollingDice: false,
-  currentPlayer: PLAYER1,
+  currentPlayer: null,
   currentRoll: [0, 0, 0, 0, 0],
   currentRollNum: 0,
   currentScores: emptyScoreboard,
   lockedDice: [],
-  [PLAYER1]: emptyScoreboard,
-  [PLAYER2]: emptyScoreboard,
+  player1Scores: emptyScoreboard,
+  player2Scores: emptyScoreboard,
   selectedSlot: null,
   selectedScore: 0,
   selectedAvailableScore: 0,
@@ -85,6 +87,17 @@ const game = (state = initialState, action) => {
         ...state,
         isLoadingGames: false,
         playerGames: action.games
+      };
+    case CREATING_GAME:
+      return {
+        ...state,
+        isCreatingGame: true
+      };
+    case GAME_LOADED:
+      return {
+        ...state,
+        isCreatingGame: false,
+        gameId: (action.game || {})._id
       };
     default:
       return state;

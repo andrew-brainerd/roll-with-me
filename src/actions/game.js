@@ -2,8 +2,9 @@ import * as gameApi from '../api/game';
 import * as utils from '../utils/game';
 import { emptyScoreboard } from '../constants/game';
 import { MENU_ROUTE, GAME_ROUTE } from '../constants/routes';
-import { getLockedDice, getCurrentRoll } from '../selectors/game';
+import { getLockedDice, getCurrentRoll, getGameData } from '../selectors/game';
 import { getCurrentUserEmail } from '../selectors/user';
+import { getGameId } from '../selectors/routing';
 import { navTo } from './routing';
 
 const PREFIX = 'GAME';
@@ -19,7 +20,10 @@ export const EXIT_GAME = `${PREFIX}/EXIT_GAME`;
 export const LOADING_GAMES = `${PREFIX}/LOADING_GAMES`;
 export const GAMES_LOADED = `${PREFIX}/GAMES_LOADED`;
 export const CREATING_GAME = `${PREFIX}/CREATING_GAME`;
+export const LOADING_GAME = `${PREFIX}/LOADING_GAME`;
 export const GAME_LOADED = `${PREFIX}/GAME_LOADED`;
+export const SAVING_GAME = `${PREFIX}/SAVING_GAME`;
+export const GAME_SAVED = `${PREFIX}/GAME_SAVED`;
 
 export const rollingDice = { type: ROLLING_DICE };
 export const diceRolled = roll => ({ type: DICE_ROLLED, roll });
@@ -30,7 +34,10 @@ export const setSelected = (slot, score, availableScore) => ({ type: SET_SELECTE
 export const loadingGames = { type: LOADING_GAMES };
 export const gamesLoaded = games => ({ type: GAMES_LOADED, games });
 export const creatingGame = { type: CREATING_GAME };
+export const loadingGame = { type: LOADING_GAME };
 export const gameLoaded = game => ({ type: GAME_LOADED, game });
+export const savingGame = { type: SAVING_GAME };
+export const gameSaved = { type: GAME_SAVED };
 
 export const rollDice = () => async (dispatch, getState) => {
   const previousRoll = getCurrentRoll(getState());
@@ -49,7 +56,7 @@ export const rollDice = () => async (dispatch, getState) => {
 
 export const play = (slot, score) => (dispatch, getState) => {
   dispatch({ type: PLAY_ROLL, slot, score });
-  dispatch(saveScore());
+  dispatch(saveGame());
   dispatch(resetRoll());
 };
 
@@ -84,6 +91,16 @@ export const loadPlayerGames = () => async (dispatch, getState) => {
   });
 };
 
-export const saveScore = () => async (dispatch, getState) => {
-  dispatch(savingScore);
+export const saveGame = () => async (dispatch, getState) => {
+  dispatch(savingGame);
+  const gameId = getGameId(getState());
+  const game = getGameData(getState());
+  gameApi.saveGame(gameId, game).then(() => dispatch(gameSaved));
+};
+
+export const loadGame = gameId => async (dispatch, getState) => {
+  dispatch(loadingGame);
+  gameApi.loadGame(gameId).then(game =>
+    dispatch(gameLoaded(game))
+  );
 };

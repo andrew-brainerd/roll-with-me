@@ -1,9 +1,13 @@
-import React from 'react';
-import { bool } from 'prop-types';
+import React, { useEffect } from 'react';
+import { string, bool, func } from 'prop-types';
 import GameBoard from '../GameBoard/container';
 import GameOver from '../GameOver/container';
 
-const Game = ({ isGameOver }) => {
+const Game = ({ gameId, isGameOver, loadGame }) => {
+  useEffect(() => {
+    gameId && loadGame(gameId);
+  }, [gameId, loadGame]);
+
   return (
     <>
       <GameBoard />
@@ -13,7 +17,9 @@ const Game = ({ isGameOver }) => {
 };
 
 Game.propTypes = {
-  isGameOver: bool
+  gameId: string,
+  isGameOver: bool,
+  loadGame: func.isRequired
 };
 
 export default Game;

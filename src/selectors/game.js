@@ -1,6 +1,8 @@
-import { path } from 'ramda';
+import { path, pick, prop, compose } from 'ramda';
 import { createSelector } from 'reselect';
-import { PLAYER1, PLAYER2 } from '../constants/game';
+import { saveGameProperties } from '../constants/game';
+
+export const getGame = prop('game');
 
 export const getIsPlaying = path(['game', 'isPlaying']);
 
@@ -14,9 +16,9 @@ export const getCurrentRoll = path(['game', 'currentRoll']);
 
 export const getLockedDice = path(['game', 'lockedDice']);
 
-export const getPlayer1Scores = path(['game', PLAYER1]);
+export const getPlayer1Scores = path(['game', 'player1Scores']);
 
-export const getPlayer2Scores = path(['game', PLAYER2]);
+export const getPlayer2Scores = path(['game', 'player2Scores']);
 
 export const getCurrentScores = path(['game', 'currentScores']);
 
@@ -27,6 +29,10 @@ export const getSelectedScore = path(['game', 'selectedScore']);
 export const getSelectedAvailableScore = path(['game', 'selectedAvailableScore']);
 
 export const getPlayerGames = path(['game', 'playerGames']);
+
+export const getGameId = path('game', 'gameId');
+
+export const getGameData = compose(pick(saveGameProperties), getGame);
 
 export const deriveIsPlayer1Done = createSelector(getPlayer1Scores, player1Scores => {
   const unfilledScores = Object.values(player1Scores).filter(value => value === -1);

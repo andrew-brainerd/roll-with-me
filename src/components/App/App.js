@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import { MENU_ROUTE, GAME_ROUTE } from '../../constants/routes';
 import Header from '../Header/container';
 import Menu from '../Menu/container';
-import Game from '../Game/Game';
+import Game from '../Game/container';
 
 const App = ({ history }) => {
   return (
