@@ -5,7 +5,7 @@ import {
   UNLOCK_DIE,
   SCORES_CALCULATED,
   SET_SELECTED,
-  PLAY_GAME,
+  PLAY_ROLL,
   LOADING_GAMES,
   GAMES_LOADED
 } from '../actions/game';
@@ -66,7 +66,7 @@ const game = (state = initialState, action) => {
         selectedScore: action.score,
         selectedAvailableScore: action.availableScore
       };
-    case PLAY_GAME:
+    case PLAY_ROLL:
       return {
         ...state,
         [state.currentPlayer]: {

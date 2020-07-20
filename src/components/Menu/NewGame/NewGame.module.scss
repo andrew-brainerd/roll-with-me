@@ -1,0 +1,10 @@
+@import '../../../styles/mixins.scss';
+
+.menuButton {
+  @include fadeInAnimation();
+
+  background: black;
+  font-size: 3em;
+  margin: 0 20px;
+  width: 150px;
+}

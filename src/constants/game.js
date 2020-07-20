@@ -1,3 +1,6 @@
+export const SOLO_GAME = 'solo';
+export const VERSUS_GAME = 'versus';
+
 export const PLAYER1 = 'player1';
 export const PLAYER2 = 'player2';
 

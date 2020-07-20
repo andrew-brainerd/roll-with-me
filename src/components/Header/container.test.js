@@ -4,8 +4,8 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import getNavToAction from '../../../__mocks__/navToAction';
-import { LOADING_USER } from '../../actions/players';
-import { EXIT_GAME } from '../../actions/games';
+import { LOADING_USER } from '../../actions/user';
+import { EXIT_GAME } from '../../actions/game';
 import Container from './container';
 import Header from './Header';
 

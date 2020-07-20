@@ -27,17 +27,17 @@ describe('User Reducer', () => {
         currentUser: {}
       };
 
-      const player = {
+      const user = {
         _id: '12345',
-        name: 'Test Player'
+        name: 'Test User'
       };
 
       const expectedState = {
         isLoadingUser: false,
-        currentUser: player
+        currentUser: user
       };
 
-      const action = { type: SET_CURRENT_USER, player };
+      const action = { type: SET_CURRENT_USER, user };
 
       const newState = reducer(initialState, action);
 

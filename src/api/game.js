@@ -1,8 +1,9 @@
 import { prop } from 'ramda';
 import { client } from './tools';
+import { SOLO_GAME } from '../constants/game';
 
-export const createGame = async (name, createdBy = 'System') => {
-  const response = await client.post('/games', { name, createdBy })
+export const createGame = async (type = SOLO_GAME, createdBy = 'System') => {
+  const response = await client.post('/games', { type, createdBy })
     .then(prop('data'))
     .catch(err => console.error(err));
 

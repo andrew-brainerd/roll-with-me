@@ -3,8 +3,16 @@ import { shallow } from 'enzyme';
 import App from './App';
 
 describe('App Component', () => {
+  let props;
+
+  beforeEach(() => {
+    props = {
+      history: {}
+    };
+  });
+
   const render = () => shallow(
-    <App />
+    <App {...props} />
   );
 
   it('should render', () => {

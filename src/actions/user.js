@@ -18,10 +18,8 @@ export const setCurrentUser = user => async dispatch => {
   usersApi.getUserByEmail(user.email)
     .then(({ doesNotExist, ...userData }) => {
       if (doesNotExist) {
-        console.log('Creating User', { name: user.name, email: user.email });
         usersApi.createUser(user.name, user.email);
       }
-      console.log({ ...user, ...userData });
       dispatch({ type: SET_CURRENT_USER, user: { ...user, ...userData } });
     })
     .catch(err => dispatch(loadingUserFailed(err)));

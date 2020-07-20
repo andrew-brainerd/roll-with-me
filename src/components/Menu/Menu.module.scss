@@ -4,7 +4,7 @@
   align-items: center;
   display: flex;
   height: 70vh;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 0 auto;
   max-width: 750px;
 
@@ -12,7 +12,7 @@
     @include fadeInAnimation();
 
     background: black;
-    font-size: 3em;
-    width: 150px;
+    font-size: 2.5em;
+    padding: 10px 15px;
   }
 }

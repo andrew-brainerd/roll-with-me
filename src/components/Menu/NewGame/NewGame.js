@@ -1,6 +1,6 @@
 import React from 'react';
 import { func } from 'prop-types';
-import Button from '../common/Button/Button';
+import Button from '../../common/Button/Button';
 import styles from './NewGame.module.scss';
 
 const NewGame = ({ startSoloGame, startVersusGame }) => {
