@@ -9,11 +9,14 @@ import {
   LOADING_GAMES,
   GAMES_LOADED,
   CREATING_GAME,
-  GAME_LOADED
+  GAME_LOADED,
+  LOADING_GAME
 } from '../actions/game';
 import { emptyScoreboard } from '../constants/game';
 
 export const initialState = {
+  isLoadingGames: false,
+  isLoadingGame: false,
   isPlaying: false,
   isRollingDice: false,
   currentPlayer: null,
@@ -21,8 +24,8 @@ export const initialState = {
   currentRollNum: 0,
   currentScores: emptyScoreboard,
   lockedDice: [],
-  player1Scores: emptyScoreboard,
-  player2Scores: emptyScoreboard,
+  player1: emptyScoreboard,
+  player2: emptyScoreboard,
   selectedSlot: null,
   selectedScore: 0,
   selectedAvailableScore: 0,
@@ -69,6 +72,11 @@ const game = (state = initialState, action) => {
         selectedAvailableScore: action.availableScore
       };
     case PLAY_ROLL:
+      console.log('PLAY_ROLL', {
+        currentPlayer: state.currentPlayer,
+        slot: action.slot,
+        score: action.score
+      });
       return {
         ...state,
         [state.currentPlayer]: {
@@ -93,11 +101,21 @@ const game = (state = initialState, action) => {
         ...state,
         isCreatingGame: true
       };
+    case LOADING_GAME:
+      return {
+        ...state,
+        isLoadingGame: true
+      };
     case GAME_LOADED:
       return {
         ...state,
+        isLoadingGame: false,
         isCreatingGame: false,
-        gameId: (action.game || {})._id
+        isPlaying: true,
+        currentPlayer: (action.game || {}).currentPlayer,
+        gameId: (action.game || {})._id,
+        player1: (action.game && action.game.player1) || state.player1,
+        player2: (action.game && action.game.player2) || state.player2
       };
     default:
       return state;

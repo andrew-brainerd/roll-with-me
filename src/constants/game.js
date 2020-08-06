@@ -33,7 +33,6 @@ export const emptyScoreboard = {
 
 export const saveGameProperties = [
   'currentPlayer',
-  'currentRollNum',
-  'player1Scores',
-  'player2Scores'
+  'player1',
+  'player2'
 ];

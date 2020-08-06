@@ -95,11 +95,13 @@ export const saveGame = () => async (dispatch, getState) => {
   dispatch(savingGame);
   const gameId = getGameId(getState());
   const game = getGameData(getState());
+  console.log('Saving game...', gameId, game);
   gameApi.saveGame(gameId, game).then(() => dispatch(gameSaved));
 };
 
 export const loadGame = gameId => async (dispatch, getState) => {
   dispatch(loadingGame);
+  await new Promise(resolve => setTimeout(resolve, 1000));
   gameApi.loadGame(gameId).then(game =>
     dispatch(gameLoaded(game))
   );

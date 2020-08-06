@@ -15,6 +15,7 @@ const NewGame = ({ startSoloGame, startVersusGame }) => {
         className={styles.menuButton}
         text='VS'
         onClick={startVersusGame}
+        disabled
       />
     </div>
   );

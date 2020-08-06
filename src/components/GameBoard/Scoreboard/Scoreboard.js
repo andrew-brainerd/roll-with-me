@@ -18,6 +18,8 @@ import {
 } from '../../../constants/game';
 
 const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selectedAvailableScore, setSelected }) => {
+  console.log('Selected Slot', selectedSlot);
+
   const {
     [ONES]: ones,
     [TWOS]: twos,
@@ -32,7 +34,7 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
     [LG_STRAIGHT]: lgStraight,
     [KIND5]: kind5,
     [CHANCE]: chance
-  } = player1;
+  } = player1 || {};
 
   const {
     [ONES]: availableOnes,
@@ -158,6 +160,7 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
             ].join(' ')}
             onClick={() => hasCurrentScores && setSelected(slot, score, availableScore)}
           >
+            {console.log({ selectedSlot, slot, score, label })}
             <div className={styles.scoreLabel}>{label}</div>
             <div className={styles.scoreValue}>{score >= 0 ? score : ''}</div>
             <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>

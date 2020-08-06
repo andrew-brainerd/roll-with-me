@@ -1,5 +1,6 @@
 import React from 'react';
 import { node, bool, func, string, oneOfType, number } from 'prop-types';
+import { isMobile } from 'react-device-detect';
 import noop from '../../../utils/noop';
 import styles from './Button.module.scss';
 
@@ -9,6 +10,7 @@ const Button = ({ children, className, disabled, name, onClick, text }) => (
     className={[
       styles.button,
       disabled ? styles.disabled : '',
+      !isMobile ? styles.animateHover : '',
       className
     ].join(' ')}
     onClick={!disabled ? onClick : noop}

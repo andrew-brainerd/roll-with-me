@@ -27,6 +27,8 @@
 }
 
 .headerMenu {
+  display: flex;
+  flex-direction: column;
   left: 0;
   position: absolute;
   top: 25px;
@@ -38,8 +40,8 @@
     width: 150px;
 
     &:hover {
-      background: $gray-60;
-      transform: none;
+      background: $gray-60 !important;
+      transform: none !important;
     }
   }
 }
