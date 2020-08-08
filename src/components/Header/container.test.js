@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import getNavToAction from '../../../__mocks__/navToAction';
 import { LOADING_USER } from '../../actions/user';
-import { EXIT_GAME } from '../../actions/game';
+import { EXIT_GAME, SAVING_GAME } from '../../actions/game';
 import Container from './container';
 import Header from './Header';
 
@@ -74,6 +74,6 @@ describe('Header Container', () => {
 
     component.props().exitGame();
 
-    expect(store.getActions()).toEqual([{ type: EXIT_GAME }, getNavToAction('/')]);
+    expect(store.getActions()).toEqual([{ type: SAVING_GAME }, { type: EXIT_GAME }, getNavToAction('/')]);
   });
 });

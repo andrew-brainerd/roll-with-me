@@ -32,7 +32,11 @@ export const emptyScoreboard = {
 };
 
 export const saveGameProperties = [
+  'isGameOver',
   'currentPlayer',
+  'currentRoll',
+  'currentRollNum',
+  'currentScores',
   'player1',
   'player2'
 ];

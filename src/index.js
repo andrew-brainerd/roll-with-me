@@ -3,7 +3,7 @@ import WebFont from 'webfontloader';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store/configureStore';
-import App from './components/App/container';
+import App from './components/App/App';
 import './index.css';
 
 WebFont.load({

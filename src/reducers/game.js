@@ -18,6 +18,7 @@ export const initialState = {
   isLoadingGames: false,
   isLoadingGame: false,
   isPlaying: false,
+  isGameOver: false,
   isRollingDice: false,
   currentPlayer: null,
   currentRoll: [0, 0, 0, 0, 0],
@@ -72,11 +73,6 @@ const game = (state = initialState, action) => {
         selectedAvailableScore: action.availableScore
       };
     case PLAY_ROLL:
-      console.log('PLAY_ROLL', {
-        currentPlayer: state.currentPlayer,
-        slot: action.slot,
-        score: action.score
-      });
       return {
         ...state,
         [state.currentPlayer]: {
@@ -88,7 +84,8 @@ const game = (state = initialState, action) => {
     case LOADING_GAMES:
       return {
         ...state,
-        isLoadingGames: true
+        isLoadingGames: true,
+        playerGames: []
       };
     case GAMES_LOADED:
       return {
@@ -104,18 +101,22 @@ const game = (state = initialState, action) => {
     case LOADING_GAME:
       return {
         ...state,
-        isLoadingGame: true
+        isLoadingGame: true,
+        isPlaying: false,
+        currentPlayer: null,
+        gameId: '',
+        type: '',
+        player1: emptyScoreboard,
+        player2: emptyScoreboard
       };
     case GAME_LOADED:
+      console.log('Game Loaded', action.game);
       return {
         ...state,
         isLoadingGame: false,
         isCreatingGame: false,
         isPlaying: true,
-        currentPlayer: (action.game || {}).currentPlayer,
-        gameId: (action.game || {})._id,
-        player1: (action.game && action.game.player1) || state.player1,
-        player2: (action.game && action.game.player2) || state.player2
+        ...action.game
       };
     default:
       return state;

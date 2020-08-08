@@ -14,23 +14,23 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
     isAuthenticated && !isLoading && !isLoadingUser && loadPlayerGames();
   }, [isAuthenticated, isLoading, isLoadingUser, loadPlayerGames]);
 
-  console.log('Loading games', isLoadingGames);
-
   return (
     <div className={styles.playerGames}>
-      {isLoadingGames ? <Loading isActive /> : (games || []).map(game => {
-        console.log('Player Game: ', game);
-
-        return (
-          <div className={styles.game} key={game._id}>
-            {game.type === SOLO_GAME ? 'Solo' : 'VS'}
-            <Button
-              text='Play'
-              onClick={() => navTo(GAME_ROUTE.replace(':gameId', game._id))}
-            />
-          </div>
-        );
-      })}
+      {isLoadingGames ? <Loading isActive /> : (games || []).map(game => (
+        <div
+          className={[
+            styles.game,
+            game.isGameOver ? styles.gameOver : ''
+          ].join(' ')} key={game._id}
+        >
+          {console.log('Game', game)}
+          {game.type === SOLO_GAME ? 'Solo' : 'VS'}
+          <Button
+            text='Play'
+            onClick={() => navTo(GAME_ROUTE.replace(':gameId', game._id))}
+          />
+        </div>
+      ))}
     </div>
   );
 };

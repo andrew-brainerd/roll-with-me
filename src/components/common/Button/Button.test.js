@@ -28,7 +28,7 @@ describe('Button Component', () => {
 
     const className = component.props().className.trim();
 
-    expect(className).toEqual('button disabled');
+    expect(className).toEqual('button disabled animateHover');
   });
 
   describe('onClick', () => {

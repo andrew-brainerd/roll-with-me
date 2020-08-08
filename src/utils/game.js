@@ -1,4 +1,5 @@
 import { uniq } from 'ramda';
+import { ONES, TWOS, THREES, FOURS, FIVES, SIXES, KIND3, KIND4, KIND5, FULL_HOUSE, SM_STRAIGHT, LG_STRAIGHT, CHANCE } from '../constants/game';
 
 const rollDie = () => Math.floor(Math.random() * 6) + 1;
 
@@ -116,3 +117,22 @@ export const calculateScores = roll => ({
   kind5: calculateKindScore(roll, 5),
   chance: addAllDice(roll)
 });
+
+export const getNumValue = num => num < 0 ? 0 : num;
+
+export const getNumberTotal = playerScores =>
+  getNumValue(playerScores[ONES]) +
+  getNumValue(playerScores[TWOS]) +
+  getNumValue(playerScores[THREES]) +
+  getNumValue(playerScores[FOURS]) +
+  getNumValue(playerScores[FIVES]) +
+  getNumValue(playerScores[SIXES]);
+
+export const getSpecialTotal = playerScores =>
+  getNumValue(playerScores[KIND3]) +
+  getNumValue(playerScores[KIND4]) +
+  getNumValue(playerScores[KIND5]) +
+  getNumValue(playerScores[FULL_HOUSE]) +
+  getNumValue(playerScores[SM_STRAIGHT]) +
+  getNumValue(playerScores[LG_STRAIGHT]) +
+  getNumValue(playerScores[CHANCE]);

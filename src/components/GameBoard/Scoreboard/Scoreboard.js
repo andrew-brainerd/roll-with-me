@@ -1,5 +1,5 @@
 import React from 'react';
-import { object, string, number, func } from 'prop-types';
+import { object, string, func } from 'prop-types';
 import styles from './Scoreboard.module.scss';
 import {
   ONES,
@@ -17,9 +17,7 @@ import {
   CHANCE
 } from '../../../constants/game';
 
-const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selectedAvailableScore, setSelected }) => {
-  console.log('Selected Slot', selectedSlot);
-
+const Scoreboard = ({ player1, currentScores, selectedSlot, setSelected }) => {
   const {
     [ONES]: ones,
     [TWOS]: twos,
@@ -98,6 +96,8 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
   const numberTotal = getNumValue(ones) + getNumValue(twos) + getNumValue(threes) +
     getNumValue(fours) + getNumValue(fives) + getNumValue(sixes);
 
+  const leftTotal = numberTotal >= 63 ? numberTotal + 35 : numberTotal;
+
   const specialScores = [
     {
       slot: KIND3,
@@ -146,7 +146,7 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
   const specialTotal = getNumValue(kind3) + getNumValue(kind4) + getNumValue(kind5) +
     getNumValue(fullHouse) + getNumValue(smStraight) + getNumValue(lgStraight) + getNumValue(chance);
 
-  const total = numberTotal + specialTotal;
+  const total = leftTotal + specialTotal;
 
   return (
     <div className={styles.scoreboard}>
@@ -160,7 +160,6 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, selectedScore, selec
             ].join(' ')}
             onClick={() => hasCurrentScores && setSelected(slot, score, availableScore)}
           >
-            {console.log({ selectedSlot, slot, score, label })}
             <div className={styles.scoreLabel}>{label}</div>
             <div className={styles.scoreValue}>{score >= 0 ? score : ''}</div>
             <div className={styles.scoreAvailable}>{availableScore >= 0 ? availableScore : ''}</div>
@@ -203,8 +202,6 @@ Scoreboard.propTypes = {
   player1: object,
   currentScores: object,
   selectedSlot: string,
-  selectedScore: number,
-  selectedAvailableScore: number,
   setSelected: func.isRequired
 };
 

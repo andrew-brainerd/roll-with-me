@@ -2,7 +2,7 @@ import * as gameApi from '../api/game';
 import * as utils from '../utils/game';
 import { emptyScoreboard } from '../constants/game';
 import { MENU_ROUTE, GAME_ROUTE } from '../constants/routes';
-import { getLockedDice, getCurrentRoll, getGameData } from '../selectors/game';
+import { getLockedDice, getCurrentRoll, getGameData, getGame } from '../selectors/game';
 import { getCurrentUserEmail } from '../selectors/user';
 import { getGameId } from '../selectors/routing';
 import { navTo } from './routing';
@@ -51,6 +51,7 @@ export const rollDice = () => async (dispatch, getState) => {
 
     dispatch(scoresCalculated(utils.calculateScores(lockedRoll)));
     dispatch(diceRolled(lockedRoll));
+    dispatch(saveGame());
   });
 };
 
@@ -70,6 +71,7 @@ export const resetRoll = () => dispatch => {
 };
 
 export const exitGame = () => async dispatch => {
+  dispatch(saveGame());
   dispatch({ type: EXIT_GAME });
   dispatch(navTo(MENU_ROUTE));
 };
@@ -94,9 +96,10 @@ export const loadPlayerGames = () => async (dispatch, getState) => {
 export const saveGame = () => async (dispatch, getState) => {
   dispatch(savingGame);
   const gameId = getGameId(getState());
-  const game = getGameData(getState());
-  console.log('Saving game...', gameId, game);
-  gameApi.saveGame(gameId, game).then(() => dispatch(gameSaved));
+  const game = getGame(getState());
+  const gameData = getGameData(getState());
+  console.log('Saving game...', { gameId, gameData, game });
+  gameApi.saveGame(gameId, gameData).then(() => dispatch(gameSaved));
 };
 
 export const loadGame = gameId => async (dispatch, getState) => {

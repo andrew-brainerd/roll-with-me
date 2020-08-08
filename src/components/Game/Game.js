@@ -10,14 +10,11 @@ const Game = ({ gameId, isPlaying, isLoadingGame, isGameOver, loadGame }) => {
     gameId && loadGame(gameId);
   }, [gameId, loadGame]);
 
-  console.log('Loading game', isLoadingGame);
-
   return (
     <div className={styles.game}>
       {isLoadingGame || !isPlaying ? <Loading isActive /> :
         <>
-          <GameBoard />
-          {isGameOver && <GameOver />}
+          {isGameOver ? <GameOver /> : <GameBoard />}
         </>
       }
     </div>
