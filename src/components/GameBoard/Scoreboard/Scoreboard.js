@@ -26,37 +26,37 @@ const Scoreboard = ({ playerScores, currentScores, selectedSlot, setSelected }) 
       slot: ONES,
       label: 'Ones',
       score: playerScores[ONES],
-      availableScore: currentScores[ONES]
+      availableScore: currentScores[ONES] || 0
     },
     {
       slot: TWOS,
       label: 'Twos',
       score: playerScores[TWOS],
-      availableScore: currentScores[TWOS]
+      availableScore: currentScores[TWOS] || 0
     },
     {
       slot: THREES,
       label: 'Threes',
       score: playerScores[THREES],
-      availableScore: currentScores[THREES]
+      availableScore: currentScores[THREES] || 0
     },
     {
       slot: FOURS,
       label: 'Fours',
       score: playerScores[FOURS],
-      availableScore: currentScores[FOURS]
+      availableScore: currentScores[FOURS] || 0
     },
     {
       slot: FIVES,
       label: 'Fives',
       score: playerScores[FIVES],
-      availableScore: currentScores[FIVES]
+      availableScore: currentScores[FIVES] || 0
     },
     {
       slot: SIXES,
       label: 'Sixes',
       score: playerScores[SIXES],
-      availableScore: currentScores[SIXES]
+      availableScore: currentScores[SIXES] || 0
     }
   ];
 

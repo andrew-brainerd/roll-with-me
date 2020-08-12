@@ -47,7 +47,7 @@
     "test": "react-scripts test --watchAll=false",
     "test:watch": "react-scripts test",
     "lint:js": "eslint src/",
-    "lint:css": "stylelint --config stylelint.json **/*.css",
+    "lint:css": "stylelint --config stylelint.json **/*.scss",
     "coverage": "yarn test --coverage --coverageDirectory coverage --watchAll=false",
     "verify": "yarn run lint:js && yarn run lint:css && yarn test"
   },

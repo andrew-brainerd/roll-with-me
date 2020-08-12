@@ -1,4 +1,4 @@
-@import '../../../styles/sizing.scss';
+@import '../../../styles/sizing';
 
 .scoreboard {
   background: white;
@@ -29,7 +29,8 @@
         width: 70%;
       }
 
-      .scoreValue, .scoreAvailable {
+      .scoreValue,
+      .scoreAvailable {
         border: 2px solid black;
         height: 15px;
         line-height: 17px;

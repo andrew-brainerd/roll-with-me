@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store/configureStore';
 import App from './components/App/App';
-import './index.css';
+import './index.scss';
 
 WebFont.load({
   google: {

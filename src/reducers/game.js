@@ -11,7 +11,8 @@ import {
   CREATING_GAME,
   GAME_LOADED,
   LOADING_GAME,
-  GAME_OVER
+  GAME_OVER,
+  EXIT_GAME
 } from '../actions/game';
 import { emptyScoreboard } from '../constants/game';
 
@@ -118,6 +119,11 @@ const game = (state = initialState, action) => {
         isCreatingGame: false,
         isPlaying: true,
         ...action.game
+      };
+    case EXIT_GAME:
+      return {
+        ...state,
+        isGameOver: false
       };
     case GAME_OVER:
       return {
