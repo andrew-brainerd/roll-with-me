@@ -18,10 +18,11 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
     <div className={styles.playerGames}>
       {(games || []).map(game => (
         <div
+          key={game._id}
           className={[
             styles.game,
             game.isGameOver ? styles.gameOver : ''
-          ].join(' ')} key={game._id}
+          ].join(' ')}
         >
           {console.log('Game', game)}
           {game.type === SOLO_GAME ? 'Solo' : 'VS'}

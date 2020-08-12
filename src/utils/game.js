@@ -128,6 +128,11 @@ export const getNumberTotal = playerScores =>
   getNumValue(playerScores[FIVES]) +
   getNumValue(playerScores[SIXES]);
 
+export const getLeftTotal = playerScores => {
+  const numberTotal = getNumberTotal(playerScores);
+  return numberTotal >= 63 ? numberTotal + 35 : numberTotal;
+};
+
 export const getSpecialTotal = playerScores =>
   getNumValue(playerScores[KIND3]) +
   getNumValue(playerScores[KIND4]) +
@@ -136,3 +141,5 @@ export const getSpecialTotal = playerScores =>
   getNumValue(playerScores[SM_STRAIGHT]) +
   getNumValue(playerScores[LG_STRAIGHT]) +
   getNumValue(playerScores[CHANCE]);
+
+export const getTotal = playerScores => getLeftTotal(playerScores) + getSpecialTotal(playerScores);

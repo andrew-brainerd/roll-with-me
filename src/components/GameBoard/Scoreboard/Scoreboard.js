@@ -16,137 +16,97 @@ import {
   KIND5,
   CHANCE
 } from '../../../constants/game';
+import { getNumberTotal, getTotal } from '../../../utils/game';
 
-const Scoreboard = ({ player1, currentScores, selectedSlot, setSelected }) => {
-  const {
-    [ONES]: ones,
-    [TWOS]: twos,
-    [THREES]: threes,
-    [FOURS]: fours,
-    [FIVES]: fives,
-    [SIXES]: sixes,
-    [KIND3]: kind3,
-    [KIND4]: kind4,
-    [FULL_HOUSE]: fullHouse,
-    [SM_STRAIGHT]: smStraight,
-    [LG_STRAIGHT]: lgStraight,
-    [KIND5]: kind5,
-    [CHANCE]: chance
-  } = player1 || {};
-
-  const {
-    [ONES]: availableOnes,
-    [TWOS]: availableTwos,
-    [THREES]: availableThrees,
-    [FOURS]: availableFours,
-    [FIVES]: availableFives,
-    [SIXES]: availableSixes,
-    [KIND3]: availableKind3,
-    [KIND4]: availableKind4,
-    [FULL_HOUSE]: availableFullHouse,
-    [SM_STRAIGHT]: availableSmStraight,
-    [LG_STRAIGHT]: availableLgStraight,
-    [KIND5]: availableKind5,
-    [CHANCE]: availableChance
-  } = currentScores;
-
+const Scoreboard = ({ playerScores, currentScores, selectedSlot, setSelected }) => {
   const hasCurrentScores = Object.values(currentScores).filter(score => score !== 0).length > 0;
 
   const numberScores = [
     {
       slot: ONES,
       label: 'Ones',
-      score: ones,
-      availableScore: availableOnes
+      score: playerScores[ONES],
+      availableScore: currentScores[ONES]
     },
     {
       slot: TWOS,
       label: 'Twos',
-      score: twos,
-      availableScore: availableTwos
+      score: playerScores[TWOS],
+      availableScore: currentScores[TWOS]
     },
     {
       slot: THREES,
       label: 'Threes',
-      score: threes,
-      availableScore: availableThrees
+      score: playerScores[THREES],
+      availableScore: currentScores[THREES]
     },
     {
       slot: FOURS,
       label: 'Fours',
-      score: fours,
-      availableScore: availableFours
+      score: playerScores[FOURS],
+      availableScore: currentScores[FOURS]
     },
     {
       slot: FIVES,
       label: 'Fives',
-      score: fives,
-      availableScore: availableFives
+      score: playerScores[FIVES],
+      availableScore: currentScores[FIVES]
     },
     {
       slot: SIXES,
       label: 'Sixes',
-      score: sixes,
-      availableScore: availableSixes
+      score: playerScores[SIXES],
+      availableScore: currentScores[SIXES]
     }
   ];
-
-  const getNumValue = num => num < 0 ? 0 : num;
-
-  const numberTotal = getNumValue(ones) + getNumValue(twos) + getNumValue(threes) +
-    getNumValue(fours) + getNumValue(fives) + getNumValue(sixes);
-
-  const leftTotal = numberTotal >= 63 ? numberTotal + 35 : numberTotal;
 
   const specialScores = [
     {
       slot: KIND3,
       label: '3 of a Kind',
-      score: kind3,
-      availableScore: availableKind3
+      score: playerScores[KIND3],
+      availableScore: currentScores[KIND3]
     },
     {
       slot: KIND4,
       label: '4 of a Kind',
-      score: kind4,
-      availableScore: availableKind4
+      score: playerScores[KIND4],
+      availableScore: currentScores[KIND4]
     },
     {
       slot: FULL_HOUSE,
       label: 'Full House',
-      score: fullHouse,
-      availableScore: availableFullHouse
+      score: playerScores[FULL_HOUSE],
+      availableScore: currentScores[FULL_HOUSE]
     },
     {
       slot: SM_STRAIGHT,
       label: 'SM Straight',
-      score: smStraight,
-      availableScore: availableSmStraight
+      score: playerScores[SM_STRAIGHT],
+      availableScore: currentScores[SM_STRAIGHT]
     },
     {
       slot: LG_STRAIGHT,
       label: 'LG Straight',
-      score: lgStraight,
-      availableScore: availableLgStraight
+      score: playerScores[LG_STRAIGHT],
+      availableScore: currentScores[LG_STRAIGHT]
     },
     {
       slot: KIND5,
       label: '5 of a Kind',
-      score: kind5,
-      availableScore: availableKind5
+      score: playerScores[KIND5],
+      availableScore: currentScores[KIND5]
     },
     {
       slot: CHANCE,
       label: 'Chance',
-      score: chance,
-      availableScore: availableChance
+      score: playerScores[CHANCE],
+      availableScore: currentScores[CHANCE]
     }
   ];
 
-  const specialTotal = getNumValue(kind3) + getNumValue(kind4) + getNumValue(kind5) +
-    getNumValue(fullHouse) + getNumValue(smStraight) + getNumValue(lgStraight) + getNumValue(chance);
-
-  const total = leftTotal + specialTotal;
+  const numberTotal = getNumberTotal(playerScores);
+  const total = getTotal(playerScores);
 
   return (
     <div className={styles.scoreboard}>
@@ -199,7 +159,7 @@ const Scoreboard = ({ player1, currentScores, selectedSlot, setSelected }) => {
 };
 
 Scoreboard.propTypes = {
-  player1: object,
+  playerScores: object,
   currentScores: object,
   selectedSlot: string,
   setSelected: func.isRequired

@@ -61,8 +61,6 @@ export const deriveIsPlayer1Done = createSelector(getPlayer1Scores, player1Score
   const unfilledScores = Object.values((player1Scores || {})).filter(value => value === -1);
   const hasUnFilledScores = unfilledScores.length > 0;
 
-  // console.log('Player 1 Done: ', !hasUnFilledScores);
-
   return !hasUnFilledScores;
 });
 
@@ -70,8 +68,6 @@ export const deriveIsPlayer2Done = state => createSelector(getPlayer2Scores, pla
   const unfilledScores = Object.values((player2Scores || {})).filter(value => value === -1);
   const isVersusGame = getGameType(state) === VERSUS_GAME;
   const hasUnFilledScores = isVersusGame ? unfilledScores.length > 0 : false;
-
-  // console.log('Player 2 Done: ', !hasUnFilledScores);
 
   return !hasUnFilledScores;
 })(state);

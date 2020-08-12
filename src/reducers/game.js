@@ -112,7 +112,6 @@ const game = (state = initialState, action) => {
         player2: emptyScoreboard
       };
     case GAME_LOADED:
-      console.log('Game Loaded', action.game);
       return {
         ...state,
         isLoadingGame: false,

@@ -10,7 +10,7 @@ import Scoreboard from './Scoreboard';
 import { setSelected } from '../../../actions/game';
 
 const mapStateToProps = state => ({
-  player1: getPlayer1Scores(state),
+  playerScores: getPlayer1Scores(state),
   currentScores: getCurrentScores(state),
   selectedSlot: getSelectedSlot(state),
   selectedScore: getSelectedScore(state),
