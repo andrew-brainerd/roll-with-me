@@ -120,7 +120,7 @@ export const calculateScores = roll => ({
 
 export const getNumValue = num => num < 0 ? 0 : num;
 
-export const getNumberTotal = playerScores =>
+export const getNumberTotal = (playerScores = {}) =>
   getNumValue(playerScores[ONES]) +
   getNumValue(playerScores[TWOS]) +
   getNumValue(playerScores[THREES]) +
@@ -128,12 +128,12 @@ export const getNumberTotal = playerScores =>
   getNumValue(playerScores[FIVES]) +
   getNumValue(playerScores[SIXES]);
 
-export const getLeftTotal = playerScores => {
+export const getLeftTotal = (playerScores = {}) => {
   const numberTotal = getNumberTotal(playerScores);
   return numberTotal >= 63 ? numberTotal + 35 : numberTotal;
 };
 
-export const getSpecialTotal = playerScores =>
+export const getSpecialTotal = (playerScores = {}) =>
   getNumValue(playerScores[KIND3]) +
   getNumValue(playerScores[KIND4]) +
   getNumValue(playerScores[KIND5]) +
