@@ -10,7 +10,8 @@ import {
   GAMES_LOADED,
   CREATING_GAME,
   GAME_LOADED,
-  LOADING_GAME
+  LOADING_GAME,
+  GAME_OVER
 } from '../actions/game';
 import { emptyScoreboard } from '../constants/game';
 
@@ -103,6 +104,7 @@ const game = (state = initialState, action) => {
         ...state,
         isLoadingGame: true,
         isPlaying: false,
+        isGameOver: false,
         currentPlayer: null,
         gameId: '',
         type: '',
@@ -117,6 +119,11 @@ const game = (state = initialState, action) => {
         isCreatingGame: false,
         isPlaying: true,
         ...action.game
+      };
+    case GAME_OVER:
+      return {
+        ...state,
+        isGameOver: true
       };
     default:
       return state;

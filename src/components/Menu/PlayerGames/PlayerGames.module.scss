@@ -24,7 +24,8 @@
     width: 150px;
 
     &.gameOver {
-      background: $gray-55;
+      background: $gray-65;
+      opacity: 0.9;
     }
 
     .playButton {

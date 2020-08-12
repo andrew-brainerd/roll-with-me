@@ -1,9 +1,13 @@
-import React from 'react';
-import { string, number } from 'prop-types';
+import React, { useEffect } from 'react';
+import { string, number, func } from 'prop-types';
 import { VERSUS_GAME } from '../../constants/game';
 import styles from './GameOver.module.scss';
 
-const GameOver = ({ gameType, player1Score, player2Score }) => {
+const GameOver = ({ gameType, player1Score, player2Score, gameOver }) => {
+  useEffect(() => {
+    gameOver();
+  }, []);
+
   return (
     <div className={styles.gameOver}>
       <h1>Game Over</h1>
@@ -16,7 +20,8 @@ const GameOver = ({ gameType, player1Score, player2Score }) => {
 GameOver.propTypes = {
   gameType: string,
   player1Score: number,
-  player2Score: number
+  player2Score: number,
+  gameOver: func
 };
 
 export default GameOver;

@@ -14,9 +14,9 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
     isAuthenticated && !isLoading && !isLoadingUser && loadPlayerGames();
   }, [isAuthenticated, isLoading, isLoadingUser, loadPlayerGames]);
 
-  return (
+  return isLoading || isLoadingUser || isLoadingGames ? <Loading isActive /> : (
     <div className={styles.playerGames}>
-      {isLoadingGames ? <Loading isActive /> : (games || []).map(game => (
+      {(games || []).map(game => (
         <div
           className={[
             styles.game,
@@ -25,10 +25,12 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
         >
           {console.log('Game', game)}
           {game.type === SOLO_GAME ? 'Solo' : 'VS'}
-          <Button
-            text='Play'
-            onClick={() => navTo(GAME_ROUTE.replace(':gameId', game._id))}
-          />
+          {game.isGameOver ? <span /> :
+            <Button
+              text = 'Play'
+              onClick = { () => navTo(GAME_ROUTE.replace(':gameId', game._id))}
+            />
+          }
         </div>
       ))}
     </div>

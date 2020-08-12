@@ -24,6 +24,7 @@ export const LOADING_GAME = `${PREFIX}/LOADING_GAME`;
 export const GAME_LOADED = `${PREFIX}/GAME_LOADED`;
 export const SAVING_GAME = `${PREFIX}/SAVING_GAME`;
 export const GAME_SAVED = `${PREFIX}/GAME_SAVED`;
+export const GAME_OVER = `${PREFIX}/GAME_OVER`;
 
 export const rollingDice = { type: ROLLING_DICE };
 export const diceRolled = roll => ({ type: DICE_ROLLED, roll });
@@ -108,4 +109,9 @@ export const loadGame = gameId => async (dispatch, getState) => {
   gameApi.loadGame(gameId).then(game =>
     dispatch(gameLoaded(game))
   );
+};
+
+export const gameOver = () => dispatch => {
+  dispatch({ type: GAME_OVER });
+  dispatch(saveGame());
 };
