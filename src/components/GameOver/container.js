@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { derivePlayer1Score, derivePlayer2Score } from '../../selectors/game';
-import { gameOver } from '../../actions/game';
+import { gameOver, exitGame } from '../../actions/game';
 import GameOver from './GameOver';
 
 const mapStateToProps = state => ({
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  gameOver: () => dispatch(gameOver())
+  gameOver: () => dispatch(gameOver()),
+  exitGame: () => dispatch(exitGame())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver);

@@ -6,6 +6,7 @@ import { GAME_ROUTE } from '../../../constants/routes';
 import Loading from '../../common/Loading/Loading';
 import styles from './PlayerGames.module.scss';
 import Button from '../../common/Button/Button';
+import { getTotal } from '../../../utils/game';
 
 const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, navTo }) => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -25,7 +26,12 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
           ].join(' ')}
         >
           {console.log('Game', game)}
-          {game.type === SOLO_GAME ? 'Solo' : 'VS'}
+          <div className={styles.gameType}>
+            {game.type === SOLO_GAME ? 'Solo' : 'VS'}
+          </div>
+          <div className={styles.gameScore}>
+            {game.type === SOLO_GAME ? `Score: ${getTotal(game.player1)}` : ''}
+          </div>
           {game.isGameOver ? <span /> :
             <Button
               text = 'Play'
