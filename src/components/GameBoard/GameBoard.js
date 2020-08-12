@@ -5,6 +5,13 @@ import Dice from './Dice/container';
 import Button from '../common/Button/Button';
 import styles from './GameBoard.module.scss';
 
+const getRollText = rollNum => ({
+  0: '1st Roll',
+  1: '2nd Roll',
+  2: 'Last Roll',
+  3: 'Turn Over'
+})[rollNum] || rollNum;
+
 const GameBoard = ({
   isRollingDice,
   currentRollNum,
@@ -21,7 +28,7 @@ const GameBoard = ({
       <div className={styles.buttonContainer}>
         <Button
           className={styles.rollButton}
-          text={isRollingDice ? 'Rolling...' : 'Roll'}
+          text={isRollingDice ? 'Rolling...' : getRollText(currentRollNum)}
           onClick={() => rollDice()}
           disabled={isRollingDice || currentRollNum > 2}
         />

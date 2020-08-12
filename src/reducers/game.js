@@ -5,22 +5,33 @@ import {
   UNLOCK_DIE,
   SCORES_CALCULATED,
   SET_SELECTED,
-  PLAY
+  PLAY_ROLL,
+  LOADING_GAMES,
+  GAMES_LOADED,
+  CREATING_GAME,
+  GAME_LOADED,
+  LOADING_GAME,
+  GAME_OVER
 } from '../actions/game';
-import { PLAYER1, PLAYER2, emptyScoreboard } from '../constants/game';
+import { emptyScoreboard } from '../constants/game';
 
 export const initialState = {
+  isLoadingGames: false,
+  isLoadingGame: false,
+  isPlaying: false,
+  isGameOver: false,
   isRollingDice: false,
-  currentPlayer: PLAYER1,
+  currentPlayer: null,
   currentRoll: [0, 0, 0, 0, 0],
   currentRollNum: 0,
   currentScores: emptyScoreboard,
   lockedDice: [],
-  [PLAYER1]: emptyScoreboard,
-  [PLAYER2]: emptyScoreboard,
+  player1: emptyScoreboard,
+  player2: emptyScoreboard,
   selectedSlot: null,
   selectedScore: 0,
-  selectedAvailableScore: 0
+  selectedAvailableScore: 0,
+  playerGames: []
 };
 
 const game = (state = initialState, action) => {
@@ -62,7 +73,7 @@ const game = (state = initialState, action) => {
         selectedScore: action.score,
         selectedAvailableScore: action.availableScore
       };
-    case PLAY:
+    case PLAY_ROLL:
       return {
         ...state,
         [state.currentPlayer]: {
@@ -70,6 +81,48 @@ const game = (state = initialState, action) => {
           [action.slot]: action.score
         },
         currentRollNum: 0
+      };
+    case LOADING_GAMES:
+      return {
+        ...state,
+        isLoadingGames: true,
+        playerGames: []
+      };
+    case GAMES_LOADED:
+      return {
+        ...state,
+        isLoadingGames: false,
+        playerGames: action.games
+      };
+    case CREATING_GAME:
+      return {
+        ...state,
+        isCreatingGame: true
+      };
+    case LOADING_GAME:
+      return {
+        ...state,
+        isLoadingGame: true,
+        isPlaying: false,
+        isGameOver: false,
+        currentPlayer: null,
+        gameId: '',
+        type: '',
+        player1: emptyScoreboard,
+        player2: emptyScoreboard
+      };
+    case GAME_LOADED:
+      return {
+        ...state,
+        isLoadingGame: false,
+        isCreatingGame: false,
+        isPlaying: true,
+        ...action.game
+      };
+    case GAME_OVER:
+      return {
+        ...state,
+        isGameOver: true
       };
     default:
       return state;

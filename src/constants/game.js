@@ -1,5 +1,5 @@
-export const PLAYER1 = 'player1';
-export const PLAYER2 = 'player2';
+export const SOLO_GAME = 'solo';
+export const VERSUS_GAME = 'versus';
 
 export const ONES = 'ones';
 export const TWOS = 'twos';
@@ -30,3 +30,13 @@ export const emptyScoreboard = {
   [KIND5]: -1,
   [CHANCE]: -1
 };
+
+export const saveGameProperties = [
+  'isGameOver',
+  'currentPlayer',
+  'currentRoll',
+  'currentRollNum',
+  'currentScores',
+  'player1',
+  'player2'
+];

@@ -13,9 +13,11 @@
   transition: 0.3s all;
   user-select: none;
 
-  &:hover:not(.disabled) {
-    background: $buttonBackgroundHover;
-    transform: scale(1.1);
+  &.animateHover {
+    &:hover:not(.disabled) {
+      background: $buttonBackgroundHover;
+      transform: scale(1.1);
+    }
   }
 }
 
