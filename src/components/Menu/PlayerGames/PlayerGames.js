@@ -17,29 +17,31 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
 
   return isLoading || isLoadingUser || isLoadingGames ? <Loading isActive /> : (
     <div className={styles.playerGames}>
-      {(games || []).map(game => (
-        <div
-          key={game._id}
-          className={[
-            styles.game,
-            game.isGameOver ? styles.gameOver : ''
-          ].join(' ')}
-        >
-          {console.log('Game', game)}
-          <div className={styles.gameType}>
-            {game.type === SOLO_GAME ? 'Solo' : 'VS'}
+      <div className={styles.gameContainer}>
+        {(games || []).map(game => (
+          <div
+            key={game._id}
+            className={[
+              styles.game,
+              game.isGameOver ? styles.gameOver : ''
+            ].join(' ')}
+          >
+            {console.log('Game', game)}
+            <div className={styles.gameType}>
+              {game.type === SOLO_GAME ? 'Solo' : 'VS'}
+            </div>
+            <div className={styles.gameScore}>
+              {game.type === SOLO_GAME ? `Score: ${getTotal(game.player1)}` : ''}
+            </div>
+            {game.isGameOver ? <span /> :
+              <Button
+                text='Play'
+                onClick={() => navTo(GAME_ROUTE.replace(':gameId', game._id))}
+              />
+            }
           </div>
-          <div className={styles.gameScore}>
-            {game.type === SOLO_GAME ? `Score: ${getTotal(game.player1)}` : ''}
-          </div>
-          {game.isGameOver ? <span /> :
-            <Button
-              text = 'Play'
-              onClick = { () => navTo(GAME_ROUTE.replace(':gameId', game._id))}
-            />
-          }
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
