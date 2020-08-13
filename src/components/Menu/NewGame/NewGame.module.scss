@@ -1,10 +1,16 @@
 @import '../../../styles/mixins';
 
-.menuButton {
-  @include fadeInAnimation();
+.newGame {
+  display: flex;
+  margin: auto;
+  width: 90%;
 
-  background: black;
-  font-size: 3em;
-  margin: 0 20px;
-  width: 150px;
+  .menuButton {
+    @include fadeInAnimation();
+
+    background: black;
+    font-size: 3em;
+    margin: 0 20px;
+    width: 150px;
+  }
 }

@@ -9,7 +9,8 @@ import './index.scss';
 WebFont.load({
   google: {
     families: [
-      'Exo 2: 400'
+      'Exo 2: 400',
+      'Chilanka: 400'
     ]
   }
 });
