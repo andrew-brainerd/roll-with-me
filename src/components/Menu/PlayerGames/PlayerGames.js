@@ -25,8 +25,8 @@ const PlayerGames = ({ isLoadingUser, isLoadingGames, games, loadPlayerGames, na
               styles.game,
               game.isGameOver ? styles.gameOver : ''
             ].join(' ')}
+            onClick={() => navTo(GAME_ROUTE.replace(':gameId', game._id))}
           >
-            {console.log('Game', game)}
             <div className={styles.gameType}>
               {game.type === SOLO_GAME ? 'Solo' : 'VS'}
             </div>

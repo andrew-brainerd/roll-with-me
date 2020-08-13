@@ -12,7 +12,7 @@ const GameOver = ({ gameType, player1Score, player2Score, gameOver, exitGame }) 
   return (
     <div className={styles.gameOver}>
       <h1>Game Over</h1>
-      <span className={styles.score}>Player 1: {player1Score}</span>
+      <span className={styles.score}>Score: {player1Score}</span>
       {gameType === VERSUS_GAME && <span className={styles.score}>Player 2: {player2Score}</span>}
       <Button
         className={styles.exitButton}

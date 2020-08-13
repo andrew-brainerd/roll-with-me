@@ -87,18 +87,21 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         isLoadingGames: true,
+        isGameOver: false,
         playerGames: []
       };
     case GAMES_LOADED:
       return {
         ...state,
         isLoadingGames: false,
+        isLoadingGame: false,
         playerGames: action.games
       };
     case CREATING_GAME:
       return {
         ...state,
-        isCreatingGame: true
+        isCreatingGame: true,
+        isGameOver: false
       };
     case LOADING_GAME:
       return {
@@ -110,7 +113,8 @@ const game = (state = initialState, action) => {
         gameId: '',
         type: '',
         player1: emptyScoreboard,
-        player2: emptyScoreboard
+        player2: emptyScoreboard,
+        _id: ''
       };
     case GAME_LOADED:
       return {
@@ -123,7 +127,14 @@ const game = (state = initialState, action) => {
     case EXIT_GAME:
       return {
         ...state,
-        isGameOver: false
+        isLoadingGame: true,
+        isPlaying: false,
+        isGameOver: false,
+        currentPlayer: null,
+        gameId: '',
+        type: '',
+        player1: emptyScoreboard,
+        player2: emptyScoreboard
       };
     case GAME_OVER:
       return {
