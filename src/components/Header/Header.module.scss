@@ -1,13 +1,19 @@
 @import '../../styles/colors';
+@import '../../styles/sizing';
 
 .header {
   background: $gray-70;
   color: white;
   display: flex;
   height: 25px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: $maxContentWidth;
   position: absolute;
   top: 0;
   width: 100%;
+  text-align: center;
   z-index: 5;
 
   .menuIcon {

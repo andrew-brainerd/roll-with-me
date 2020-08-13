@@ -5,7 +5,7 @@ import styles from './NewGame.module.scss';
 
 const NewGame = ({ startSoloGame, startVersusGame }) => {
   return (
-    <div className={styles.menu}>
+    <div className={styles.newGame}>
       <Button
         className={styles.menuButton}
         text='Solo'

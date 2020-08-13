@@ -1,11 +1,17 @@
 @import '../../styles/mixins';
+@import '../../styles/sizing';
 
 .menu {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 75px auto;
-  max-width: 750px;
+
+  h1 {
+    color: white;
+    font-family: 'Chilanka', sans-serif;
+    font-size: 4em;
+    margin: 75px auto;
+  }
 
   .newGame {
     height: 275px;
@@ -17,5 +23,21 @@
     background: black;
     font-size: 2.5em;
     padding: 10px 15px;
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  .menu {
+    h1 {
+      font-size: 3em;
+    }
+
+    .newGame {
+      height: 125px;
+    }
+
+    .menuButton {
+      font-size: 2em;
+    }
   }
 }

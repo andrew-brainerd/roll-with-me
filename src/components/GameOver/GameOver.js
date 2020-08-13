@@ -7,7 +7,7 @@ import Button from '../common/Button/Button';
 const GameOver = ({ gameType, player1Score, player2Score, gameOver, exitGame }) => {
   useEffect(() => {
     gameOver();
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <div className={styles.gameOver}>
