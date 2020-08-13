@@ -1,10 +1,11 @@
+@import '../../styles/sizing';
+
 .gameBoard {
   align-items: center;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   font-size: 14px;
-  height: 90vh;
   overflow: hidden;
   width: 100%;
 
@@ -17,5 +18,11 @@
       margin: 0 10px;
       width: 100px;
     }
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  .gameBoard {
+    height: 90vh;
   }
 }
