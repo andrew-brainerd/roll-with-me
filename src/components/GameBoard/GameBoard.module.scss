@@ -1,3 +1,5 @@
+@import '../../styles/sizing';
+
 .gameBoard {
   align-items: center;
   display: flex;
@@ -16,5 +18,11 @@
       margin: 0 10px;
       width: 100px;
     }
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  .gameBoard {
+    height: 90vh;
   }
 }
